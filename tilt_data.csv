@@ -1,1 +1,5 @@
 loss_streak,session_losses,session_games,session_seconds,frustration,session_deaths,last_game_deaths,role,tilted
+0,0,1,1510,4.0,11,11,dps,1
+0,0,4,3542,2.0,17,7,dps,0
+1,1,1,2263,4.0,12,12,dps,1
+1,2,7,6474,3.29,35,7,dps,0
