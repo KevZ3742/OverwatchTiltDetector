@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import tkinter as tk
 
 # Load CSV
 df  = pd.read_csv("tilt_data.csv")
@@ -75,3 +76,40 @@ plt.xlabel("Epoch")
 plt.ylabel("MSE Loss")
 plt.title("Training Loss Over Time")
 plt.show()
+
+def predict_session_losses(session_seconds):
+    return m_orig * session_seconds + b_orig
+
+# ===============================
+# UI to take input and show predicted losses
+# ===============================
+
+# Create window
+root = tk.Tk()
+root.title("Overwatch Tilt Predictor")
+root.geometry("300x150")
+
+# Input label and field
+tk.Label(root, text="Enter session length (seconds):").pack(pady=5)
+session_entry = tk.Entry(root)
+session_entry.pack(pady=5)
+
+# Output label
+result_label = tk.Label(root, text="Predicted losses will appear here")
+result_label.pack(pady=10)
+
+# Function to predict
+def predict_button_clicked():
+    try:
+        session_seconds = float(session_entry.get())
+        predicted = predict_session_losses(session_seconds)
+        result_label.config(text=f"Predicted losses: {predicted}")
+    except ValueError:
+        result_label.config(text="Please enter a valid number")
+
+# Button
+predict_button = tk.Button(root, text="Predict Losses", command=predict_button_clicked)
+predict_button.pack(pady=5)
+
+# Start the UI loop
+root.mainloop()
